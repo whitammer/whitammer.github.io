@@ -1,0 +1,96 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+}
+header {
+    display: inline-block;
+    width:250px;
+    vertical-align: top;
+    padding-right: 10px;
+}
+/* @media (max-width: 930px) {
+    header {
+        width:650px;
+        padding-right: 0px;
+    }
+} */
+section {
+    display: inline-block;
+    max-width:650px;
+    vertical-align: top;
+}
+
+item {
+    display: block;
+    padding-bottom:10px;
+}
+
+name {
+    display: block;
+    font-style: italic;
+}
+authors {
+    display: block;
+}
+journal {
+    display: block;
+}
+me {
+    font-style: italic;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    background-color: #eed;
+}
+a:hover {
+    background-color: #ddb;
+}
+
+h1 {
+    font-size:inherit;
+    font-weight: bold;
+    color: black;;
+    margin-block:0px;
+    margin-bottom:1em;
+    background: #e0a0ff;
+    padding:4px;
+    border-radius: 4px;
+}
+h2 {
+   font-size: inherit;
+   font-weight: bold;
+   background: #e8a8ee;
+   margin-block:0px;
+   margin-bottom:1em;
+   padding:4px;
+   border-radius: 4px;
+}
+h3 {
+   font-size: inherit;
+   font-weight: normal;
+   background: #f0b0dd;
+   margin-block:0px;
+   margin-bottom:1em;
+   padding:4px;
+   border-radius: 4px;
+}
+h4 {
+    font-size: inherit;
+    font-weight: normal;
+    font-style: italic;
+    background: #f8b8cc;
+    margin-block:0px;
+    margin-bottom:1em;
+    padding:4px;
+    border-radius: 4px;
+}
+
+ul {
+    padding: 0em 0em 0em 1.5em;
+}
+td {
+    padding:0px;
+    vertical-align: top;;
+}
