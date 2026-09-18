@@ -1,0 +1,101 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>Maze</title>
+    <link rel="stylesheet" type="text/css" href="..//style.css">
+    <script src="maze.js"></script>
+    <style>
+        .selectedBlock {
+            background: #bb99dd;
+        }
+        .block {
+            padding: 5px;
+            display:inline-block;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spanning tree by Wilson's algorithm</h1>
+    <details>
+        <summary>Instructions</summary>
+        <p>
+            We wish to sample a spanning tree of a planar graph. We start by adding a random vertex (&bullet;) to the tree. We then select a random vertex that has not been added (<span style="color:blue;">&squarf;</span>) and simulating a <span style="color:red;">loop-erased</span> <span style="color:blue;">random walk</span> until we reach a vertex that has already been added. We then add the vertices and edges visited during the walk to the tree. This is repeated until all vertices have been added.
+        </p>
+        <p>
+            Select a lattice type (square, hexagonal, triangular) or a random point set. In the case of a random point set, the three edge settings control the manner in which the a planar graph with the sampled vertex set is constructed: greedy noncrossing insertion in increasing order of length (Short), the same in decreasing order of length (Long), or the Delaunay triangulation. The edge weights are the Euclidean distances raised to the power of the weight exponent: with larger values, longer edges are favoured.
+        </p>
+        <p>
+            The two speed sliders control the latency of the random walk and of the outer loop that adds walks to the tree under construction.
+        </p>
+    </details>
+    <div style="padding:10px; margin-bottom:10px; margin-top:10px; background:#ddbbff; display:inline-block;">
+        <div id="gridBlock" class="block">
+            <input type="radio" id="grid" name="type" value="grid" checked="checked" onclick="updateSizes()" />
+            <label for="grid">Square lattice</label><input type="checkbox" id="gridTorus" /><label for="gridTorus">Torus</label>
+            <br />
+            <label for="gridSize">Size</label>
+            <input type="range" id="gridSize" value="10" min="2" max="50" step="1" oninput="updateSizes()" style="width:150px;" />
+            <span id="gridSizeValue"></span>
+        </div>
+        <div id="hexBlock" class="block">
+            <input type="radio" id="hex" name="type" value="hex" onclick="updateSizes()" />
+            <label for="hex">Hexagonal lattice</label>
+            <input type="checkbox" id="hexTorus" /><label for="hexTorus">Torus</label>
+            <br />
+            <label for="hexSize">Size</label>
+            <input type="range" id="hexSize" value="5" min="1" max="15" step="1" oninput="updateSizes()" style="width:150px;" />
+            <span id="hexSizeValue"></span>
+        </div>
+        <div id="triangleBlock" class="block">
+            <input type="radio" id="triangle" name="type" value="triangle" onclick="updateSizes()" />
+            <label for="triangle">Triangular lattice</label>
+            <br />
+            <label for="triangleSize">Size</label>
+            <input type="range" id="triangleSize" value="8" min="1" max="25" step="1" oninput="updateSizes()" style="width:150px;" />
+            <span id="triangleSizeValue"></span>
+        </div>
+        <div id="randomBlock" class="block">
+            <input type="radio" id="random" name="type" value="random" onclick="updateSizes()" />
+            <label for="random">Random points</label>
+            <br />
+            <label for="randomSize">Size</label>
+            <input type="range" id="randomSize" value="100" min="10" max="500" step="1" oninput="updateSizes()" style="width:150px;" />
+            <span id="randomSizeValue"></span>
+            <br />
+            <label for="randomType">Edges</label>
+            <input type="radio" id="randomShort" name="randomType" value="short" checked="checked" />
+            <label for="randomShort">Short</label>
+            <input type="radio" id="randomLong" name="randomType" value="long" />
+            <label for="randomLong">Long</label>
+            <input type="radio" id="randomDelaunay" name="randomType" value="delaunay" />
+            <label for="randomDelaunay">Delaunay</label>
+            <br />
+            <label for="weightExponent">Weight exponent</label>
+            <input type="range" id="weightExponent" value="0" min="-4" max="4" step="0.01" oninput="updateSizes()" style="width:150px;" />
+            <span id="weightExponentValue"></span>
+        </div>
+    </div>
+    <div>
+        <a onclick="initialise()" >Create graph</a>
+    </div>
+    <canvas id="mazeCanvas" width="600" height="600"></canvas>
+    <div>
+        <a onclick="generateMaze()" id="generate">Generate</a>
+    </div>
+    <div style="padding:10px; margin-top:10px; background:#ffaacc; display:inline-block;">
+        <label for="speed">Random walk speed</label>
+        <input type="range" id="speed" value="1" min="0" max="3" step="0.01" oninput="updateSpeed()" style="width:300px;" />
+        <span id="speedValue"></span>
+        <br />
+        <label for="speed">Outer loop speed</label>
+        <input type="range" id="outerSpeed" value="0.3" min="0" max="3" step="0.01" oninput="updateSpeed()" style="width:300px;" />
+        <span id="outerSpeedValue"></span>
+    </div>
+
+    <script>
+        updateSpeed();
+        updateSizes();
+    </script>
+</body>
+</html>
